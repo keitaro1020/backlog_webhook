@@ -19,7 +19,7 @@ class App : AppBase() {
             map.put("username", System.getenv("BOTNAME"))
             map.put("text", typeRequest.slackMessage())
 
-            if (typeRequest.slackComment().length > 0) {
+            if (typeRequest.slackComment().isNotEmpty()) {
 
                 map.put("attachments", JsonArray(JsonObject(mapOf(
                         "color" to "#42ce9f",

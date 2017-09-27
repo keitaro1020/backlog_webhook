@@ -28,25 +28,27 @@ abstract class BacklogWebhookRequest(val jsonObj: JsonObject) {
     fun slackMessage(): String {
         val message = StringBuilder()
 
-        if (key.length > 0) {
+        if (key.isNotEmpty()) {
             message.append(key).append(" ")
         }
 
-        if (label.length > 0) {
+        if (label.isNotEmpty()) {
             message.append(label).append(" ")
         }
 
-        if (summary.length > 0) {
+        if (summary.isNotEmpty()) {
             message.append(summary).append(" ")
         }
 
-        if (name.length > 0) {
+        if (name.isNotEmpty()) {
             message.append("by ").append(name)
         }
 
-        message.append("\n")
+        if (message.isNotEmpty()) {
+            message.append("\n")
+        }
 
-        if (url.length > 0) {
+        if (url.isNotEmpty()) {
             message.append(url).append("\n")
         }
 
