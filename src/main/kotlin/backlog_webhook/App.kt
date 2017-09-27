@@ -21,16 +21,17 @@ class App : AppBase() {
 
             if (typeRequest.slackComment().length > 0) {
 
-                map.put("attachments", arrayOf(mapOf(
+                map.put("attachments", JsonArray(JsonObject(mapOf(
                         "color" to "#42ce9f",
-                        "fields" to arrayOf(mapOf(
+                        "fields" to JsonArray(JsonObject(mapOf(
                                 "value" to typeRequest.slackComment(),
                                 "short" to false
                         )))
-                ))
+                ))).toJsonString())
             }
 
-            val (_, response, _) = "https://slack.com/api/chat.postMessage".httpPost(map.toList()).responseString()
+            val (request, response, _) = "https://slack.com/api/chat.postMessage".httpPost(map.toList()).responseString()
+            logger.log("req:" + request.toString())
             logger.log("res:" + response.toString())
             output.write(JsonObject(mapOf("result" to "success")).toJsonString().toByteArray())
         }
