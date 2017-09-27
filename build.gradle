@@ -1,0 +1,82 @@
+group 'backlog-webhook'
+version '0.0.1-SNAPSHOT'
+
+import com.amazonaws.services.lambda.model.*
+import jp.classmethod.aws.gradle.lambda.*
+
+buildscript {
+    ext.kotlin_version = '1.1.50'
+
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "jp.classmethod.aws:gradle-aws-plugin:0.+"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'jp.classmethod.aws'
+apply plugin: 'jp.classmethod.aws.lambda'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile (
+            "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version",
+            'com.amazonaws:aws-lambda-java-core:1.+',
+            'com.amazonaws:aws-lambda-java-events:1.+',
+            "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0",
+            'com.beust:klaxon:0.30',
+            'com.github.kittinunf.fuel:fuel:1.8.0',
+            "khttp:khttp:0.1.0"
+
+    )
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    into('lib') {
+        from configurations.compile
+    }
+}
+
+aws {
+    profileName "default"
+    region "ap-northeast-1"
+}
+
+def myFunctionName = "backlog-webhook" // modify for your function name
+
+task migrateFunction(type: AWSLambdaMigrateFunctionTask, dependsOn: build) {
+    functionName = myFunctionName
+    role = "arn:aws:iam::${aws.accountId}:role/lambda-poweruser" // need this in your IAM role
+    runtime = Runtime.Java8
+    zipFile = jar.archivePath
+    handler = "backlog_webhook.App::handler" // application handler FQCN::method
+    memorySize = 256 // default 128 MB
+    timeout = 30 // default 3 sec
+}
+
+task invokeFunction(type: AWSLambdaInvokeTask) {
+    functionName = myFunctionName
+    invocationType = InvocationType.RequestResponse
+    payload = file("testdata.json")
+    doLast {
+        println "Lambda function status : " + invokeResult.statusCode
+        println "Lambda function result : " + new String(invokeResult.payload.array(), "UTF-8")
+        println "InvokeResult debug info: " + invokeResult.toString()
+    }
+}
+
+task deleteFunction(type: AWSLambdaDeleteFunctionTask) {
+    functionName = myFunctionName
+}
