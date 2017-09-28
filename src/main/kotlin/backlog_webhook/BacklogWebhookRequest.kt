@@ -23,9 +23,11 @@ abstract class BacklogWebhookRequest(val jsonObj: JsonObject) {
         name = jsonObj.getObj("createdUser").getString("name")
     }
 
+    val newline: String = "\n"
+
     abstract fun make(): Unit
 
-    fun slackMessage(): String {
+    open fun slackMessage(): String {
         val message = StringBuilder()
 
         if (key.isNotEmpty()) {
@@ -55,7 +57,7 @@ abstract class BacklogWebhookRequest(val jsonObj: JsonObject) {
         return message.toString()
     }
 
-    fun slackComment(): String {
+    open fun slackComment(): String {
         if (comment.length > 200) {
             return comment.substring(0..200) + "..."
         }

@@ -18,6 +18,7 @@ class App : AppBase() {
             map.put("channel", request.getString("channel"))
             map.put("username", System.getenv("BOTNAME"))
             map.put("text", typeRequest.slackMessage())
+            map.put("icon_emoji", ":backlog:")
 
             if (typeRequest.slackComment().isNotEmpty()) {
 
