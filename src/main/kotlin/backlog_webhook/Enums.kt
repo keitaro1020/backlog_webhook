@@ -3,6 +3,7 @@ package backlog_webhook
 enum class ChangeField(val key: String, val value: String) {
     unknown("unknown", "不明"),
     status("status", "状態"),
+    commit("commit", "コミット"),
     description("description", "詳細")
 }
 

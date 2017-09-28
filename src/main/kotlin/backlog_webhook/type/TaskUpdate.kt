@@ -66,16 +66,11 @@ ${comment}
                 }
                 return result.toString()
             }
+            ChangeField.commit -> {
+                return afterValue
+            }
         }
         return "${beforeValue} -> ${afterValue}"
     }
 }
 
-fun <T> Delta<T>.typename(): String {
-    when (this.type) {
-        Delta.TYPE.INSERT -> return "追加"
-        Delta.TYPE.CHANGE -> return "変更"
-        Delta.TYPE.DELETE -> return "削除"
-        else              -> return "不明"
-    }
-}
