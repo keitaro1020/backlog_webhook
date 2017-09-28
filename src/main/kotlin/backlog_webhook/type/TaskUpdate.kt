@@ -8,7 +8,6 @@ import difflib.DiffUtils
 
 class TaskUpdate(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
 
-
     lateinit var changeField: ChangeField
     lateinit var beforeValue: String
     lateinit var afterValue: String
@@ -46,7 +45,7 @@ ${comment}
 """
     }
 
-    fun getBeforeAfterValue(beforeValue: String, afterValue: String): String {
+    private fun getBeforeAfterValue(beforeValue: String, afterValue: String): String {
         when(changeField) {
             ChangeField.status -> {
                 return "${getTaskStatus(beforeValue).value} -> ${getTaskStatus(afterValue).value}"
@@ -72,11 +71,11 @@ ${comment}
     }
 }
 
-fun <T> Delta<T>.typename() : String {
-    when(this.type) {
-        Delta.TYPE.INSERT -> { return "追加" }
-        Delta.TYPE.CHANGE -> { return "変更" }
-        Delta.TYPE.DELETE -> { return "削除" }
+fun <T> Delta<T>.typename(): String {
+    when (this.type) {
+        Delta.TYPE.INSERT -> return "追加"
+        Delta.TYPE.CHANGE -> return "変更"
+        Delta.TYPE.DELETE -> return "削除"
+        else              -> return "不明"
     }
-    return "不明"
 }

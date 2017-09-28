@@ -24,7 +24,6 @@ class GitPullRequestUpdate(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) 
         key = "( 担当:" + content.getObj("assignee").getString("name") + " )"
         summary = "「" + content.getString("summary") + "」"
         url = baseUrl + "git/" + project.getString("projectKey") + "/" + content.getObj("repository").getString("name") + "/pullRequests/" + content.getInt("number")
-        comment = content.getString("description")
 
         projectName = project.getString("projectKey") + "/" + content.getObj("repository").getString("name")
         pullRequestNo = content.getInt("number").toString()
@@ -50,7 +49,7 @@ ${diff}
 """
     }
 
-    fun getBeforeAfterValue(beforeValue: String, afterValue: String): String {
+    private fun getBeforeAfterValue(beforeValue: String, afterValue: String): String {
         when(changeField) {
             ChangeField.status -> {
                 return "${getPullRequestStatus(beforeValue).value} -> ${getPullRequestStatus(afterValue).value}"
