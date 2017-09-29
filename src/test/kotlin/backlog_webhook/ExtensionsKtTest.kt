@@ -6,10 +6,7 @@ import org.junit.Test
 import org.junit.Assert.*
 
 import backlog_webhook.getString
-import difflib.Chunk
-import difflib.Delta
-import difflib.InsertDelta
-import difflib.Patch
+import difflib.*
 
 /**
  * Created by keitaro.shishido on 2017/09/29.
@@ -48,21 +45,9 @@ class ExtensionsKtTest {
 
     @Test
     fun typename() {
-        val insert = object : InsertDelta<String>(Chunk<String>(0, emptyList()), Chunk<String>(0, emptyList())) {
-            override fun getType(): TYPE {
-                return TYPE.INSERT
-            }
-        }
-        val delete = object : InsertDelta<String>(Chunk<String>(0, emptyList()), Chunk<String>(0, emptyList())) {
-            override fun getType(): TYPE {
-                return TYPE.DELETE
-            }
-        }
-        val change = object : InsertDelta<String>(Chunk<String>(0, emptyList()), Chunk<String>(0, emptyList())) {
-            override fun getType(): TYPE {
-                return TYPE.CHANGE
-            }
-        }
+        val insert = InsertDelta<String>(Chunk<String>(0, emptyList()), Chunk<String>(0, emptyList()))
+        val delete = DeleteDelta<String>(Chunk<String>(0, emptyList()), Chunk<String>(0, emptyList()))
+        val change = ChangeDelta<String>(Chunk<String>(0, emptyList()), Chunk<String>(0, emptyList()))
         assertEquals(insert.typename(), "追加")
         assertEquals(delete.typename(), "削除")
         assertEquals(change.typename(), "変更")
