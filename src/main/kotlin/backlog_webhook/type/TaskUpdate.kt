@@ -40,7 +40,7 @@ class TaskUpdate(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
 ${getBeforeAfterValue(beforeValue, afterValue).toLineOmit(10)}
 
 コメント：
-${comment}
+${comment.toLineOmit(10)}
 """
     }
 

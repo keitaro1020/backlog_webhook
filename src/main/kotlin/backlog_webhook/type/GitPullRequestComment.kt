@@ -14,7 +14,6 @@ class GitPullRequestComment(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj)
         val project = jsonObj.getObj("project")
         val content = jsonObj.getObj("content")
 
-        key = "( 担当:" + content.getObj("assignee").getString("name") + " )"
         summary = content.getString("summary")
         url = baseUrl + "git/" + project.getString("projectKey") + "/" + content.getObj("repository").getString("name") + "/pullRequests/" + content.getInt("number") + "#comment-" + content.getInt("id")
         comment = content.getObj("comment").getString("content")
