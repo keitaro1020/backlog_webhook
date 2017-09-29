@@ -4,6 +4,9 @@ enum class ChangeField(val key: String, val value: String) {
     unknown("unknown", "不明"),
     status("status", "状態"),
     commit("commit", "コミット"),
+    parentIssue("parentIssue", "親課題"),
+    startDate("startDate", "開始日"),
+    limitDate("limitDate", "期限日"),
     description("description", "詳細")
 }
 
