@@ -3,7 +3,6 @@ package backlog_webhook.type
 import backlog_webhook.*
 import com.beust.klaxon.JsonObject
 import com.beust.klaxon.array
-import difflib.Delta
 import difflib.DiffUtils
 
 class TaskUpdate(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
@@ -38,7 +37,7 @@ class TaskUpdate(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
     override fun slackComment(): String {
         return """
 変更箇所：${changeField.value}
-${getBeforeAfterValue(beforeValue, afterValue)}
+${getBeforeAfterValue(beforeValue, afterValue).toLineOmit(10)}
 
 コメント：
 ${comment}

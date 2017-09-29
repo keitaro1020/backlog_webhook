@@ -36,7 +36,7 @@ class GitPullRequestUpdate(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) 
     override fun slackMessage(): String {
         return """
 *${label}*
-[${projectName}] Comment from ${name}
+[${projectName}] Pull request updated by ${name}
 """
     }
 

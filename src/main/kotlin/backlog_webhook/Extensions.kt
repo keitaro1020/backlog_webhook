@@ -23,3 +23,13 @@ fun <T> Delta<T>.typename(): String {
         else              -> return "不明"
     }
 }
+
+fun String.toLineOmit(maxLine: Int): String {
+    val splits = this.split("\n")
+    return splits
+            .take(maxLine)
+            .joinToString("\n")
+            .plus(if(splits.size > maxLine){ "\n..." } else { ""} )
+}
+
+

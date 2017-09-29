@@ -9,10 +9,22 @@ class WikiAdd(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
         label = "Wiki追加"
 
         val content = jsonObj.getObj("content")
+        val project = jsonObj.getObj("project")
 
-        key = ""
-        summary = "「" + content.getString("name") + "」"
+        key = "${project.getString("name")}(${project.getString("projectKey")})"
+        summary = content.getString("name")
         url = baseUrl + "alias/wiki/" + content.getInt("id")
-        comment = name + "さんがWikiページを追加しました。"
+        comment = content.getString("content")
+    }
+
+    override fun slackMessage(): String {
+        return """
+*${label}*
+<${url}|${key} - ${summary} (by ${name})>
+"""
+    }
+
+    override fun slackComment(): String {
+        return comment.toLineOmit(10)
     }
 }
