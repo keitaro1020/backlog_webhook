@@ -11,7 +11,8 @@ abstract class BacklogWebhookRequest(val jsonObj: JsonObject) {
 
     lateinit var baseUrl: String
 
-    lateinit var label: String
+    abstract val label: String
+
     lateinit var key: String
     lateinit var summary: String
     lateinit var url: String

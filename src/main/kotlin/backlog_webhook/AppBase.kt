@@ -11,9 +11,11 @@ abstract class AppBase {
 
     lateinit var request: JsonObject
     lateinit var jsonObj: JsonObject
+
     lateinit var input: InputStream
     lateinit var output: OutputStream
     lateinit var context: Context
+
     lateinit var logger: LambdaLogger
 
     fun handler(input: InputStream, output: OutputStream, context: Context) {

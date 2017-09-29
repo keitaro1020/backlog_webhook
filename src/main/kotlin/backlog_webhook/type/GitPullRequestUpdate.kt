@@ -7,6 +7,8 @@ import difflib.DiffUtils
 
 class GitPullRequestUpdate(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
 
+    override val label = "プルリクエスト更新"
+
     lateinit var projectName: String
     lateinit var pullRequestNo: String
 
@@ -16,8 +18,6 @@ class GitPullRequestUpdate(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) 
     lateinit var afterValue: String
 
     override fun make() {
-        label = "プルリクエスト更新"
-
         val project = jsonObj.getObj("project")
         val content = jsonObj.getObj("content")
 

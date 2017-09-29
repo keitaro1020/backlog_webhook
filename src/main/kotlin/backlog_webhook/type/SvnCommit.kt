@@ -5,9 +5,9 @@ import com.beust.klaxon.JsonObject
 
 class SvnCommit(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
 
-    override fun make() {
-        label = "SVNコミット"
+    override val label = "SVNコミット"
 
+    override fun make() {
         val project = jsonObj.getObj("project")
         val content = jsonObj.getObj("content")
 

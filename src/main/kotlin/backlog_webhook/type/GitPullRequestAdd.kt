@@ -6,6 +6,8 @@ import com.beust.klaxon.obj
 
 class GitPullRequestAdd(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
 
+    override val label = "プルリクエスト追加"
+
     lateinit var projectName: String
     lateinit var pullRequestNo: String
 
@@ -13,8 +15,6 @@ class GitPullRequestAdd(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
     lateinit var base: String
 
     override fun make() {
-        label = "プルリクエスト追加"
-
         val project = jsonObj.getObj("project")
         val content = jsonObj.getObj("content")
 

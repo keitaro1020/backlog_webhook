@@ -6,12 +6,12 @@ import com.beust.klaxon.array
 
 class GitPush(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
 
+    override val label = "Gitプッシュ"
+
     lateinit var projectName: String
     lateinit var revKey: String
 
     override fun make() {
-        label = "Gitプッシュ"
-
         val project = jsonObj.getObj("project")
         val content = jsonObj.getObj("content")
 

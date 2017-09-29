@@ -5,9 +5,9 @@ import com.beust.klaxon.JsonObject
 
 class WikiAdd(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
 
-    override fun make() {
-        label = "Wiki追加"
+    override val label = "Wiki追加"
 
+    override fun make() {
         val content = jsonObj.getObj("content")
         val project = jsonObj.getObj("project")
 

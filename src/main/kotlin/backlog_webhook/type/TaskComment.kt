@@ -5,9 +5,9 @@ import com.beust.klaxon.JsonObject
 
 class TaskComment(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
 
-    override fun make() {
-        label = "課題にコメント"
+    override val label = "課題にコメント"
 
+    override fun make() {
         val project = jsonObj.getObj("project")
         val content = jsonObj.getObj("content")
 

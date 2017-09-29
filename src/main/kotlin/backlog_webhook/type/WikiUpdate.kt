@@ -5,12 +5,12 @@ import com.beust.klaxon.JsonObject
 
 class WikiUpdate(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
 
+    override val label = "Wiki更新"
+
     lateinit var beforeValue: String
     lateinit var afterValue: String
 
     override fun make() {
-        label = "Wiki更新"
-
         val content = jsonObj.getObj("content")
         val project = jsonObj.getObj("project")
 

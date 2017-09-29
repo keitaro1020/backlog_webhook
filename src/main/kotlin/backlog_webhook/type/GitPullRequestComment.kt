@@ -5,12 +5,12 @@ import com.beust.klaxon.JsonObject
 
 class GitPullRequestComment(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
 
+    override val label = "プルリクエストコメント"
+
     lateinit var projectName: String
     lateinit var pullRequestNo: String
 
     override fun make() {
-        label = "プルリクエストコメント"
-
         val project = jsonObj.getObj("project")
         val content = jsonObj.getObj("content")
 

@@ -7,13 +7,13 @@ import difflib.DiffUtils
 
 class TaskUpdate(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
 
+    override val label = "課題を更新"
+
     lateinit var changeField: ChangeField
     lateinit var beforeValue: String
     lateinit var afterValue: String
 
     override fun make() {
-        label = "課題を更新"
-
         val project = jsonObj.getObj("project")
         val content = jsonObj.getObj("content")
 
