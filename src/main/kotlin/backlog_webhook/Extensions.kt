@@ -20,7 +20,6 @@ fun <T> Delta<T>.typename(): String {
         Delta.TYPE.INSERT -> return "追加"
         Delta.TYPE.CHANGE -> return "変更"
         Delta.TYPE.DELETE -> return "削除"
-        else              -> return "不明"
     }
 }
 
@@ -32,4 +31,6 @@ fun String.toLineOmit(maxLine: Int): String {
             .plus(if(splits.size > maxLine){ "\n..." } else { ""} )
 }
 
-
+fun getEnv(name: String, default: String = ""): String {
+    return System.getenv(name) ?: default
+}

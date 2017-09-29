@@ -20,7 +20,7 @@ abstract class BacklogWebhookRequest(val jsonObj: JsonObject) {
     lateinit var name: String
 
     fun makeBase(): Unit {
-        baseUrl = System.getenv("BASEURL")
+        baseUrl = getEnv("BASEURL")
         name = jsonObj.getObj("createdUser").getString("name")
     }
 

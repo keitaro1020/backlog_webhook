@@ -14,9 +14,9 @@ class App : AppBase() {
             logger.log(typeRequest.slackMessage())
 
             val map = mutableMapOf<String, Any?>()
-            map.put("token", System.getenv("SLACKTOKEN"))
+            map.put("token", getEnv("SLACKTOKEN"))
             map.put("channel", request.getString("channel"))
-            map.put("username", System.getenv("BOTNAME"))
+            map.put("username", getEnv("BOTNAME"))
             map.put("text", typeRequest.slackMessage())
             map.put("icon_emoji", ":backlog:")
 

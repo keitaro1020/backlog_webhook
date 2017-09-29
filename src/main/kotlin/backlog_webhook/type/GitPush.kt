@@ -19,7 +19,7 @@ class GitPush(jsonObj: JsonObject): BacklogWebhookRequest(jsonObj) {
         var gitRev = revisions?.getString("rev") ?: ""
         var gitComment = revisions?.getString("comment") ?: ""
 
-        revKey = gitRev.substring(0..9)
+        revKey = if (gitRev.length > 9) gitRev.substring(0..9) else ""
         url = baseUrl + "git/" + project.getString("projectKey") + "/" + content.getObj("repository").getString("name") + "/" + content.getString("revision_type") + "/" + gitRev
         comment = gitComment
 
