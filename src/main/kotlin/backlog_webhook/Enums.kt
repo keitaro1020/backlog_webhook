@@ -7,7 +7,8 @@ enum class ChangeField(val key: String, val value: String) {
     parentIssue("parentIssue", "親課題"),
     startDate("startDate", "開始日"),
     limitDate("limitDate", "期限日"),
-    description("description", "詳細")
+    description("description", "詳細"),
+    assigner("assigner", "担当者")
 }
 
 fun getChangeField(key: String?): ChangeField {
