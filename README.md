@@ -1,6 +1,4 @@
-# backlogのWebhookをSlackに通知するAWS Lambda用プログラム
-
-## デプロイ方法
+## backlogのWebhookをSlackに通知するAWS Lambda用プログラム
 
 - 事前設定
     - `~/.aws/credentials` ファイルを作成し、マネジメントコンソールでIAMユーザーを作成したときに取得した `aws_access_key_id` と `aws_secret_access_key` を記載しておく。
