@@ -5,7 +5,7 @@ import com.amazonaws.services.lambda.model.*
 import jp.classmethod.aws.gradle.lambda.*
 
 buildscript {
-    ext.kotlin_version = '1.1.50'
+    ext.kotlin_version = '1.2.41'
 
     repositories {
         mavenCentral()
@@ -61,7 +61,7 @@ aws {
 def myFunctionName = "backlog-webhook" // modify for your function name
 
 task migrateFunction(type: AWSLambdaMigrateFunctionTask, dependsOn: build) {
-    functionName = myFunctionName
+    functionName = project.hasProperty("fname") ? project.property("fname") : myFunctionName
     role = "arn:aws:iam::${aws.accountId}:role/lambda-poweruser" // need this in your IAM role
     runtime = Runtime.Java8
     zipFile = jar.archivePath
@@ -71,7 +71,7 @@ task migrateFunction(type: AWSLambdaMigrateFunctionTask, dependsOn: build) {
 }
 
 task invokeFunction(type: AWSLambdaInvokeTask) {
-    functionName = myFunctionName
+    functionName = project.hasProperty("fname") ? project.property("fname") : myFunctionName
     invocationType = InvocationType.RequestResponse
     payload = file("testdata.json")
     doLast {
@@ -82,5 +82,5 @@ task invokeFunction(type: AWSLambdaInvokeTask) {
 }
 
 task deleteFunction(type: AWSLambdaDeleteFunctionTask) {
-    functionName = myFunctionName
+    functionName = project.hasProperty("fname") ? project.property("fname") : myFunctionName
 }

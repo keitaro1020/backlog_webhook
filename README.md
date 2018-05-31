@@ -15,7 +15,7 @@ aws_secret_access_key = another-SECRET-ACCESS-KEY-you-got-in-csv
 
 - デプロイ
 ```
-> ./gradlew migrateFunction
+> ./gradlew migrateFunction -Pname="function_name"
 ```
 
 - 設定
