@@ -46,6 +46,7 @@ class App : AppBase() {
             14  -> return TaskCollectUpdate(jsonObj)
             5   -> return WikiAdd(jsonObj)
             6   -> return WikiUpdate(jsonObj)
+            8   -> return FileAdd(jsonObj)
             11  -> return SvnCommit(jsonObj)
             12  -> return GitPush(jsonObj)
             18  -> return GitPullRequestAdd(jsonObj)
